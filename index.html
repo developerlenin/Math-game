@@ -10,12 +10,31 @@
 	</head>
 	<style>
 	.porblem{
-    width: 300px;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(0 0 0);
+    margin: 10px;
+	padding: 0px 30px
+
+}
+	.problems{
+	display: flex;
+    <!-- width: 100%; -->
+	}
+	
+	h1{
+	font-size:20px;
+	margin: 4px 4px
+	}
+	.expanded{
+    width: 200px;
     height: 200px;
     border: 2px solid rgb(0 0 0);
     margin: 10px;
+	padding: 0px 30px
 	}
-	h
+	
+	
 	</style>
 	
 	<body>
@@ -48,6 +67,8 @@
 			  return parseInt(Math.random() *max)
 			  
 			 }
+			 
+			
 			           function texttosymbol(text){
 						switch (text){
 						case 'Add' :
@@ -67,9 +88,14 @@
 						break;
 						}
 					   }
+					    function restprolems(){
+					     problems.innerHTML= "";
+					   }
               function updatenumber(number1, number2, opration){
 			   let problemEle=document.createElement("div");
-				problemEle.setAttribute('class', 'porblem');
+				problemEle.setAttribute('class', 'porblem' );
+					
+				problemEle.addEventListener("click",Expand);
 				
 				let number1Ele = document.createElement("h1");
 					number1Ele.innerText = number1;
@@ -99,12 +125,21 @@
 						    random1, random2;
 						  
 						   if(opration !== 'Divide'){
+						    restprolems();
 							for(var i=1;i<=16;i++){
 							  random1=generaternumber(range),
 							   random2=generaternumber(range);
 							  updatenumber(random1, random2, opration)
 							}
 						   }
+						   }
+						   function Expand(){  
+						   
+ 						   var problems=document.getElementsByClassName("porblem");
+						    problems[3].classList.add('expanded' );
+				
+							
+			
 						   }
 	</script>
 	</body>
