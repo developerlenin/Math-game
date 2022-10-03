@@ -10,16 +10,20 @@
 	</head>
 	<style>
 	.porblem{
-    width: 100px;
-    height: 100px;
+     width: 187px;
+    height: 120px;
     border: 2px solid rgb(0 0 0);
     margin: 10px;
-	padding: 0px 30px
-
+    padding: 0px 2px;
 }
-	.problems{
+
+
+	#problems{
 	display: flex;
-    <!-- width: 100%; -->
+    flex-wrap: wrap;
+    justify-content: center;
+    <!-- width: 50%; -->
+	
 	}
 	
 	h1{
@@ -58,11 +62,14 @@
 		</select>
 	 </div>
 	 <button id="start" onclick=answer()>Start</button>
+	 <button id="Calculate" onclick=stage2opration()>Calculate</button>
 	 <div id="problems"> </div>
+	 
+	 
 	<script>
 	 var startbutton = document.getElementById("start");
-	  var problems=document.getElementById("problems")
-			 
+	  var problems=document.getElementById("problems");
+		var CalculatEle=document.getElementById("Calculate")	;
 			 function generaternumber(max){
 			  return parseInt(Math.random() *max)
 			  
@@ -95,19 +102,21 @@
 			   let problemEle=document.createElement("div");
 				problemEle.setAttribute('class', 'porblem' );
 					
-				problemEle.addEventListener("click",Expand);
-				
+						
 				let number1Ele = document.createElement("h1");
+				number1Ele .setAttribute('class', 'number1Ele' );   
 					number1Ele.innerText = number1;
 				let oprationEle = document.createElement("h1");
+			          oprationEle  .setAttribute('class', 'oprationElem ' );   
 					oprationEle.innerText = texttosymbol(opration);
 				
 				let number2Ele = document.createElement("h1");
+                 number2Ele  .setAttribute('class', 'number2Ele' );   
 				number2Ele.innerText = number2;
 					
-				let inputEle = document.createElement("h3");
-					inputEle.setAttribute = ('class', 'answ');
-					inputEle.setAttribute = ('type', 'text');
+				let inputEle = document.createElement("input");
+					inputEle.setAttribute ('class', 'answ');
+					inputEle.setAttribute ('type', 'text');
 					
 					problemEle.append(number1Ele)
 					problemEle.append(oprationEle)
@@ -133,13 +142,55 @@
 							}
 						   }
 						   }
-						   function Expand(){  
 						   
- 						   var problems=document.getElementsByClassName("porblem");
-						    problems[3].classList.add('expanded' );
-				
+						   function stage2opration(){
+						   
+						   var problemElements= document.getElementsByClassName("porblem"),
+						   number1Ele ,  operationEle ,   number2Ele ,  problemEle ,  number1Value , number2Value , expectedAns , operationType , actualAnswerEle , actualEle , mark = 0;
+						   
+						   for (i=0; i<problemElements.length; i++){
+						   problemEle = problemElements[i];
+						   
+						   
+						  operationEle = problemEle.getElementsByClassName('oprationElem')[0];
+							operationType = operationEle.innerText;
 							
-			
+							number1Ele = problemEle.getElementsByClassName('number1Ele')[0];
+							number1Value =parseInt(number1Ele.innerText);
+							
+							 number2Ele = problemEle.getElementsByClassName('number2Ele')[0];
+							 
+							 number2Value =parseInt( number2Ele.innerText);
+							
+							if(operationType == '+'){
+							expectedAns = number1Value + number2Value;
+							}
+							
+							else if(operationType == '-'){
+							expectedAns = number1Value - number2Value;
+							}
+							
+							else if(operationType == '*'){
+							expectedAns = number1Value * number2Value;
+							}
+							else{
+							expectedAns = number1Value / number2Value;
+							}
+							
+							actualAnswerEle = document.getElementsByClassName('answ')[i];
+							actualEle = parseInt(actualAnswerEle.value)
+							 
+							 if(expectedAns == actualEle){
+							   mark++;
+						
+							 }
+							
+							}
+						   
+						   alert ("Your mark is"   +mark) ;
 						   }
+						   
+						   
+						   
 	</script>
 	</body>
